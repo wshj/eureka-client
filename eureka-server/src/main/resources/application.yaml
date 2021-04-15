@@ -26,4 +26,5 @@ eureka:
 
 
 spring:
-  application.name: ${eureka.instance.hostname}
+  # 此值推荐使用 eureka.instance.appname 的值，不然在根据服务名称获取服务时无法正确获取
+  application.name: ${eureka.instance.appname}
