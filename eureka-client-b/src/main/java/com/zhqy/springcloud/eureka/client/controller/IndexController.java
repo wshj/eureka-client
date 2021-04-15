@@ -60,6 +60,7 @@ public class IndexController {
 
     @GetMapping("/loadBalance")
     public String index2loadBalance() {
+        // 负责均衡的方式获取服务，只获取状态是 InstanceInfo.InstanceStatus.UP 的实例
         // 参数就是配置的 spring.application.name 的值
         return loadBalancerClient.choose("eureka-client-a").getHost();
     }
