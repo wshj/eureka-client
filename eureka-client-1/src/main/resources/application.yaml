@@ -1,0 +1,29 @@
+server.port: 9001
+
+
+eureka:
+  instance:
+    # 【推荐】应用名称，当前集群的所有项目需要相同，否则无法进行关联
+    ## 如果名称不同，无法显示到 available-replicas 中；会显示为2个独立的Application
+    ## 如果名称相同的话，是一个Application中有多个服务
+    # 此处配置优先于 spring.application.name
+    ## 如果此处没有配置，则获取 spring.application.name 的值
+    ## 如果两个都没有写，则显示 UNKNOWN
+    ## 如果两个都写了，spring.application.name 的值会现在到 Status 列下，例如：UP (1) - localhost:eureka1:8001
+    appname: eureka-client
+    # 【必填】主机名或者当前服务域名，和appname搭配达到"一个Application中多个服务"
+    hostname: eureka-client1.zhqy.com
+  client:
+    #是否将自己注册到Eureka Server,默认为true
+    register-with-eureka: true
+    #是否从eureka server获取注册信息
+    fetch-registry: true
+    # 向指定的服务器进行注册
+    service-url:
+      # eureka 所有协议都是基于 restful 协议
+      # 这里是一个map结构
+      -defaultZone: http://eureka1.zhqy.com/eureka
+
+
+spring:
+  application.name: ${eureka.instance.hostname}
